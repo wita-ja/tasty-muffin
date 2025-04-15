@@ -15,9 +15,9 @@ export class HomePage {
         return this.page.locator('.block-header-layout-desktop').getByTestId('header-btn-shoppingbag');
     }
 
-    public async openShopPage() {
+    public async navigateToShopPage() {
         return await this.shopButton.click();
-    } 
+    }
 
     public get successOrderModal(): Locator {
         return this.page.getByTestId('ecommerce-modal-checkout-success-order');

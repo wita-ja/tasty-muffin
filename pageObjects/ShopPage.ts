@@ -9,6 +9,10 @@ export class ShopPage {
 
     public get product(): Locator {
         return this.page.getByTestId('product-list-section-item-title');
-    } 
+    }
+
+    public async selectProductByIndex(index: number = 1): Promise<void> {
+        await this.product.nth(index).click();
+    }
 }
 

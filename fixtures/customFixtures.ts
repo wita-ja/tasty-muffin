@@ -1,9 +1,8 @@
 import { test as base } from '@playwright/test';
-import { HomePage } from '../pageObjects/HomePage';
+import { HomePage } from '../pageObjects/homePage/HomePage';
 import { ProductPage } from '../pageObjects/ProductPage';
 import { ShopPage } from '../pageObjects/ShopPage';
-import { CheckoutPage } from '../pageObjects/CheckoutPage';
-
+import { CheckoutPage } from '../pageObjects/checkoutPage/CheckoutPage';
 
 type MyFixtures = {
   homePage: HomePage;

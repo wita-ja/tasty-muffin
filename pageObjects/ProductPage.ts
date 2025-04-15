@@ -11,14 +11,16 @@ export class ProductPage {
         return this.page.getByTestId('productpage-text-qty');
     }
 
-    public get addProductButton() {
+    public get addProductButton(): Locator {
         return this.page.getByTestId('productsection-btn-addtobag');
     }
 
-    public get shoppingCartCheckoutButton() {
-         return this.page.getByTestId('shoppingcart-btn-checkout');
+    public get shoppingCartCheckoutButton(): Locator {
+        return this.page.getByTestId('shoppingcart-btn-checkout');
     }
 
-
+    public async setProductQuantity(quantity: number): Promise<void> {
+        await this.productQuantityField.fill(quantity.toString());
+    }
 }
 
