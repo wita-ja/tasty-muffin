@@ -1,5 +1,4 @@
-import type { PlaywrightTestConfig } from '@playwright/test';
-import { devices } from '@playwright/test';
+import { defineConfig } from '@playwright/test';
 
 /**
  * Read environment variables from file.
@@ -10,7 +9,7 @@ import { devices } from '@playwright/test';
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-const config: PlaywrightTestConfig = {
+export default defineConfig( {
   testDir: './tests/',
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
@@ -19,7 +18,7 @@ const config: PlaywrightTestConfig = {
      * Maximum time expect() should wait for the condition to be met.
      * For example in `await expect(locator).toHaveText();`
      */
-    timeout: 5000
+    timeout: 2500
   },
   workers: 5,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -40,17 +39,24 @@ const config: PlaywrightTestConfig = {
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
-    baseURL: 'https://www.saucedemo.com/',
+    baseURL: 'https://lightgrey-antelope-m7vwozwl8xf7l3y2.builder-preview.com',
     //headless: false,
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
+      name: 'Google Chrome',
       use: {
-        ...devices['Desktop Chrome'],
+        channel: 'chrome',
+        testIdAttribute: 'data-qa',
+        viewport: null,
+        launchOptions: {
+          args: ["--start-maximized"]
+        }
+        
       },
+      fullyParallel: true
     },
     /* 
         {
@@ -67,33 +73,6 @@ const config: PlaywrightTestConfig = {
           },
         },
      */
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: {
-    //     ...devices['Pixel 5'],
-    //   },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: {
-    //     ...devices['iPhone 12'],
-    //   },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: {
-    //     channel: 'msedge',
-    //   },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: {
-    //     channel: 'chrome',
-    //   },
-    // },
   ],
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
@@ -104,6 +83,4 @@ const config: PlaywrightTestConfig = {
   //   command: 'npm run start',
   //   port: 3000,
   // },
-};
-
-export default config;
+});
