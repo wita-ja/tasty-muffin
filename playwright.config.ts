@@ -1,5 +1,4 @@
 import { defineConfig } from '@playwright/test';
-import { devices } from '@playwright/test';
 
 /**
  * Read environment variables from file.
@@ -49,10 +48,15 @@ export default defineConfig( {
     {
       name: 'Google Chrome',
       use: {
-        //...devices['Desktop Chrome'],
         channel: 'chrome',
-        testIdAttribute: 'data-qa'
+        testIdAttribute: 'data-qa',
+        viewport: null,
+        launchOptions: {
+          args: ["--start-maximized"]
+        }
+        
       },
+      fullyParallel: true
     },
     /* 
         {

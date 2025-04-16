@@ -19,8 +19,12 @@ export class ProductPage {
         return this.page.getByTestId('shoppingcart-btn-checkout');
     }
 
-    public async setProductQuantity(quantity: number): Promise<void> {
-        await this.productQuantityField.fill(quantity.toString());
+    public async setProductQuantity(random: boolean = true, quantity: number = 0): Promise<void> {
+        const randomNumber = Math.floor(Math.random() * 10) + 1;
+        const finalQuantity = random ? randomNumber.toString() : quantity.toString();
+
+        console.log(finalQuantity)
+        await this.productQuantityField.fill(finalQuantity);
     }
 }
 

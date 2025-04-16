@@ -23,15 +23,15 @@ export class CheckoutPage {
     }
 
     public getCountryOptionByText(optionText: string): Locator {
-        return this.page.getByRole('option', { name: optionText })
+        return this.page.getByRole('option', { name: optionText });
     }
 
     public getShippingOptionRadioButton(shippingOption: ShippingOption): Locator {
-        return this.page.getByTestId(`checkout-shippingdetails-option-${shippingOption}`)
+        return this.page.getByTestId(`checkout-shippingdetails-option-${shippingOption}`);
     }
 
     public getParcelAddressOptionByText(optionText: string): Locator {
-        return this.page.getByRole('option', { name: optionText })
+        return this.page.getByRole('option', { name: optionText });
     }
 
     public async selectShippingAddress(country: string, shippingOption: ShippingOption, address: string): Promise<void> {
@@ -40,6 +40,10 @@ export class CheckoutPage {
         await this.getShippingOptionRadioButton(shippingOption).click();
         await this.shippingAddressSelect.click();
         await this.getParcelAddressOptionByText(address).click();
+    }
+
+    public get parcelAdressValidationText(): Locator {
+        return this.page.getByTestId('checkout-shippingoptions-parcelselect').getByRole('alert');
     }
 
     //Contact info part
@@ -86,5 +90,21 @@ export class CheckoutPage {
 
     public async enterDietComment(comment: string = 'No restrictions'): Promise<void> {
         await this.commentTextArea.fill(comment);
+    }
+
+    public get emailValidationText(): Locator {
+        return this.page.getByTestId('checkout-contactinformation-email').getByRole('alert');
+    } 
+
+    public get fullnameValidationText(): Locator {
+        return this.page.getByTestId('checkout-contactinformation-name').getByRole('alert');
+    }
+
+    public get phoneNumberValidationText(): Locator {
+        return this.page.getByTestId('checkout-contactinformation-phone').locator(' .text-error');
+    }
+
+    public get commentValidationText(): Locator {
+        return this.page.getByTestId('checkout-contactinformation-customfield').getByRole('alert');
     }
 }
