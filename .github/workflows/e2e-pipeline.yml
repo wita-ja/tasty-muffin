@@ -38,9 +38,12 @@ jobs:
       - name: Generate allure result
         if: always()
         run: npm run generate-allure
+      - name: Check if allure results are generated
+        if: always()  
+        run: ls -la allure-report
       - name: Upload test results
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Allure-report
           path: allure-report
