@@ -16,11 +16,9 @@ test.describe('Product ordering flow', () => {
   });
 
   test('should order successfully product from the shop', async ({ homePage, checkoutPage }) => {
-    //shipping page
     await checkoutPage.selectShippingAddress("Lithuania", ShippingOption.LpExpress, 'CUP, Upės g. 9, Vilnius');
     await checkoutPage.shippingDetailsContinueButton.click();
 
-    //contact info and confirmation
     await checkoutPage.emailInput.fill('Vita-Test@any.com');
     await checkoutPage.fullnameInput.fill('Vita Test');
     await checkoutPage.enterPhoneNumber('370', '60000000');
@@ -37,7 +35,6 @@ test.describe('Product ordering flow', () => {
   })
 
   test('should trigger shipping information field validations', async ({ checkoutPage }) => {
-    //shipping page
     await checkoutPage.shippingCountrySelect.click();
     await checkoutPage.getCountryOptionByText('Lithuania').click();
     await checkoutPage.shippingDetailsContinueButton.click();
@@ -47,13 +44,10 @@ test.describe('Product ordering flow', () => {
   })
 
   test('should trigger contact information field validations', async ({ checkoutPage }) => {
-    //shipping page
-    await checkoutPage.selectShippingAddress("Lithuania", ShippingOption.LpExpress, 'CUP, Upės g. 9, Vilnius');
+    await checkoutPage.selectShippingAddress("Lithuania", ShippingOption.DpdPickup, 'CUP DPD paštomatas 019, UPĖS G. 9, VILNIUS');
     await checkoutPage.shippingDetailsContinueButton.click();
-
-    //contact info and confirmation
     await checkoutPage.contactInfoContinueButton.click();
-    checkoutPage.page.pause();
+  
     await expect.soft(checkoutPage.emailValidationText).toHaveText(CheckoutPageErrorMessages.EMAIL_VALIDATION_TEXT);
     await expect.soft(checkoutPage.fullnameValidationText).toHaveText(CheckoutPageErrorMessages.FULLNAME_VALIDATION_TEXT);
     await expect.soft(checkoutPage.phoneNumberValidationText).toHaveText(CheckoutPageErrorMessages.PHONE_NUMBER_VALIDATION_TEXT);

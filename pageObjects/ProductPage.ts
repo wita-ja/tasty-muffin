@@ -23,7 +23,6 @@ export class ProductPage {
         const randomNumber = Math.floor(Math.random() * 10) + 1;
         const finalQuantity = random ? randomNumber.toString() : quantity.toString();
 
-        console.log(finalQuantity)
         await this.productQuantityField.fill(finalQuantity);
     }
 }

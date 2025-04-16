@@ -40,7 +40,7 @@ export default defineConfig( {
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     baseURL: 'https://lightgrey-antelope-m7vwozwl8xf7l3y2.builder-preview.com',
-    headless: false,
+    //headless: false,
   },
 
   /* Configure projects for major browsers */
